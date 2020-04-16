@@ -13,7 +13,7 @@ if ($result->num_rows > 0) {
        <div class="row text-justify-center mt-3">
        <div class="col-6">
         <h1 class="display-4">' . $row["name"] . '</h1>
-        <p class="lead"></p>
+        <p class="lead"></p> 
         </div>
         <div class="col-6">
         <img class="card-img-top" style="width:300px;height:300px;" src=' . $row["image_url"] . ' />
@@ -21,7 +21,7 @@ if ($result->num_rows > 0) {
       </div>
         <hr class="my-4">
         <p>' . $row["biography"] . '</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Add Friend</a>
+        <a class="btn btn-primary btn-lg" href="data.php?method=updateBiography&id=.$id.&biography=My%20Bio&bio" role="button">Edit Bio</a>
       </div>';
     }
     echo $output;
@@ -63,11 +63,13 @@ if ($result->num_rows > 0) {
     $output = "";
     while ($row = $result->fetch_assoc()) {
          $output .=  "<li class='pl-3'>$row[name]</li>";
+         
     }
     echo $output;
 } else {
-    echo "<p class='pl-5'>0 Friends</p>";
+    echo "<li class='pl-3'>0 Enemies</li>";
 }
+
 ?>
 </div>
 </div>
@@ -89,11 +91,13 @@ if ($result->num_rows > 0) {
 } else {
     echo "<li class='pl-3'>0 Enemies</li>";
 }
+echo  '<a href="data.php?method=updatehero&id=4&  " class="btn btn-primary">Delete Enemies</a>';
 ?>
 
 <div class="row">
 <div class="card p-3" style="width: 300rem;">
 <?php
+echo "<h5>Abilities</h5>";
 $sql = "SELECT * FROM ability_hero
     INNER JOIN abilities on abilities.id=ability_hero.ability_id
     INNER JOIN heroes on heroes.id=ability_hero.hero_id
@@ -101,18 +105,28 @@ $sql = "SELECT * FROM ability_hero
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $output = "";
-    echo "<h5>Super Powers</h5>";
     while ($row = $result->fetch_assoc()) {
-        $output .= "<li class='pl-3'>$row[ability]</li>";
+        $output .= "<li class='pl-3'>$row[ability]
+        </li>";
     }
     echo $output;
+    echo  '<a href=' . $back . ' class="btn btn-primary">Edit Abilities</a>';
 } else {
-    echo "0 results";
+    echo "<li class='pl-3'>0 Enemies</li>";
 }
-
-
-
-
+?>
+<!-- <form action="data.php" method="post">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Add Profile</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form> -->
+<?php
 $back = "index.php";
 echo '<a href=' . $back . ' class="btn btn-primary">Return to Heroes</a>';
 

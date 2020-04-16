@@ -1,13 +1,10 @@
-
-
-
 <?php
 
 require "connection.php";
 require "header.php";
 
 
-echo '<div class = "text-center"><h1>Comicbook</h1></div>';
+echo '<div class = "text-center"><h1 class=" text-primary">comicbook</h1></div>';
 $sql = "SELECT * FROM heroes";
 $result = $conn->query($sql);
 
@@ -31,12 +28,9 @@ if ($result->num_rows > 0) {
                         <img class="card-img-top" style="width:50px;height:100px;" src='.$row["image_url"].' />
                         <p class="card-text">' . $row["about_me"] . '</p>   
                         <a href=' . $hero . ' class="btn btn-primary">About me</a>
-                        
-                    </div>
-                   
+                    </div>  
                 </div>';
     }
-
     echo $output;
     echo '</div>
     </div>
@@ -44,6 +38,23 @@ if ($result->num_rows > 0) {
 } else {
     echo "0 results";
 }
+
+?>
+<form action="newinfo.php" method="post">
+  <div class="form-group p-3">
+    <label for="exampleInputEmail1">ADD PROFILE</label><br>
+    <label for="exampleInputEmail1">Name</label>
+    <input type="text" class="form-control" aria-describedby="emailHelp" name="name" id="name">
+    <label for="exampleInputEmail1">About Me</label>
+    <input type="text" class="form-control" aria-describedby="emailHelp" name="about_me" id="about_me">
+    <label for="exampleInputEmail1">BIO</label>
+    <input type="text" class="form-control" aria-describedby="emailHelp" name="biography" id="biography">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your info with anyone else.</small>
+  </div>
+  <button type="submit" class="btn btn-primary ml-3">Enter</button>
+  <input type="hidden" id="method" value="newHero" name="method">
+</form>
+<?php
 
 $conn->close();
 require 'footer.php';
