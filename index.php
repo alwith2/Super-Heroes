@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
 
 // FORM TO ADD HERO
 ?>
-<form action="newinfo.php" method="post">
+<form action="newhero.php" method="post">
   <div class="form-group p-3">
     <label for="exampleInputEmail1" class="btn btn-primary">NEW HERO</label><br>
     <label for="exampleInputEmail1">Name</label>
@@ -50,8 +50,8 @@ if ($result->num_rows > 0) {
     <input type="text" class="form-control"  name="about_me" id="about_me">
     <label for="exampleInputEmail1">BIO</label>
     <input type="text" class="form-control"  name="biography" id="biography">
-    <label for="exampleInputEmail1">Ability</label>
-    <input type="text" class="form-control"  name="ability" id="ability">
+    <!-- <label for="exampleInputEmail1">Ability</label>
+    <input type="text" class="form-control"  name="ability" id="ability"> -->
     <small id="emailHelp" class="form-text text-muted">We'll never share your info with anyone else.</small>
   </div>
   <button type="submit" class="btn btn-primary ml-3">ADD PROFILE</button>
