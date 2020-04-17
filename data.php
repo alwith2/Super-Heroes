@@ -23,8 +23,6 @@ $delete = "DELETE FROM heroes WHERE id=".$var;
 // echo $hero1_id;
 // var_dump($_GET);
 
-// function updateBiography() {}
-
 //  function deleteFriend() {
 //  $sql ="DELETE FROM relationships
 //  WHERE hero1_id = " . $id . " =  type_id = 1";
@@ -35,10 +33,6 @@ $delete = "DELETE FROM heroes WHERE id=".$var;
 //            WHERE hero1_id = " . $id . " =  type_id = 2";
 // }
 
-// function editAbilities() {}
-// UPDATE table_name
-// SET column1=value, column2=value2,...
-// WHERE some_column=some_value 
 
 $conn->close();
 // header("Location: /index.php");

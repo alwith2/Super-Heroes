@@ -3,6 +3,7 @@ require "connection.php";
 require "header.php";
 
 $id = $_GET["id"];
+
 // HERO 
 $sql = "SELECT * FROM heroes WHERE id = " . $id;
 $result = $conn->query($sql);
@@ -22,8 +23,8 @@ if ($result->num_rows > 0) {
       </div>
         <hr class="my-4">
         <p>' . $row["biography"] . '</p>
-        <a href='.$variable.' class="btn btn-primary ml-3">DELETE PROFILE</a> 
-        // <a class="btn btn-primary btn-lg" href="data.php?method=updateBiography&id=' . $id . '&biography=My%20Bio&bio" role="button">Edit Bio</a>
+        <a class="btn btn-primary btn-lg" href="update.php?id=' . $id. '" role="button">Edit Bio</a>
+        <a href='.$variable.' class="btn btn-primary btn-lg ml-3">Delete Profile</a> 
       </div>';
     }
     echo $output;
@@ -50,7 +51,6 @@ if ($result->num_rows > 0) {
 } else {
     echo "<li class='pl-3'>0 Friends</li>";
 }
-
 ?>
 
 <!-- ENEMIES -->
@@ -93,10 +93,10 @@ if ($result->num_rows > 0) {
         </li>";
     }
     echo $output;
-    echo  '<a href='.$edit.' >Edit Abilities</a>';
+    echo  "<a href=".$edit." >Edit Abilities</a>";
 } else {
     echo "<li class='pl-3'>0 Abilities</li>";
-    echo  '<a href='.$edit.' >Edit Abilities</a>';
+    echo  "<a href=".$edit." >Edit Abilities</a>";
 }
 ?>
 <!-- BACK BTN -->
