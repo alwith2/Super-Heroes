@@ -1,17 +1,46 @@
 <?php
 
 require "connection.php";
-require "header.php";
 
- echo '<h2>new page</h2>';
 $method = $_GET["method"];
-$id = $_GET[relationship.id];
+$id = $_GET["heroes.id"];
+$var = $_GET["id"];
+// var_dump($var);
+
+$delete = "DELETE FROM heroes WHERE id=".$var; 
+     if ($conn->query($delete) === TRUE) {
+            echo "Record deleted successfully";
+            header("Location: /index.php");
+        } else {
+         echo "Error deleting record: " . $conn->error;
+        }
+
+
+
+// $hero1_id = $_GET["hero1_id"];
+// $hero2_id = $_GET["hero2_id"];
+// $id = $_GET[relationship.id];
+// echo $hero1_id;
+// var_dump($_GET);
 
 // function updateBiography() {}
 
+//  function deleteFriend() {
+//  $sql ="DELETE FROM relationships
+//  WHERE hero1_id = " . $id . " =  type_id = 1";
+//  }
 
+// function deleteEnemy() {
+//     $sql ="DELETE FROM relationships
+//            WHERE hero1_id = " . $id . " =  type_id = 2";
+// }
 
-require 'footer.php';
+// function editAbilities() {}
+// UPDATE table_name
+// SET column1=value, column2=value2,...
+// WHERE some_column=some_value 
+
 $conn->close();
-header("Location: /hero.php?id=" . $last_id);
+// header("Location: /index.php");
+// header("Location: /hero.php?id=" . $last_id);
 ?>

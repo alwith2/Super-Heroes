@@ -4,14 +4,14 @@ require "connection.php";
 require "header.php";
 
 
-echo '<div class = "text-center"><h1 class=" text-primary">comicbook</h1></div>';
+echo '<div class = "text-center p-5 bg-info border border-dark"><h1 class=" text-primary">comicbook</h1></div>';
 $sql = "SELECT * FROM heroes";
 $result = $conn->query($sql);
-
+// GENERATE HEROS
 echo '<div class="row">';
 if ($result->num_rows > 0) {
     $output = "";
-    echo '<div class="container pl-5">';
+    echo '<div class="container text-content-justify">';
     echo '<div class="row text-content-justify">
                </div>';
     while ($row = $result->fetch_assoc()) {
@@ -26,8 +26,8 @@ if ($result->num_rows > 0) {
                     <div class="card-body border border-dark">
                         <h5 class="card-title">' . $row["name"] . '</h5>
                         <img class="card-img-top" style="width:50px;height:100px;" src='.$row["image_url"].' />
-                        <p class="card-text">' . $row["about_me"] . '</p>   
-                        <a href=' . $hero . ' class="btn btn-primary">About me</a>
+                        <p class="card-text">' . $row["about_me"] . '</p>  
+                        <a href=' . $hero . ' class="btn btn-primary">ABOUT ME</a> 
                     </div>  
                 </div>';
     }
@@ -39,19 +39,22 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 
+// FORM TO ADD HERO
 ?>
 <form action="newinfo.php" method="post">
   <div class="form-group p-3">
-    <label for="exampleInputEmail1">ADD PROFILE</label><br>
+    <label for="exampleInputEmail1" class="btn btn-primary">NEW HERO</label><br>
     <label for="exampleInputEmail1">Name</label>
-    <input type="text" class="form-control" aria-describedby="emailHelp" name="name" id="name">
+    <input type="text" class="form-control"  name="name" id="name">
     <label for="exampleInputEmail1">About Me</label>
-    <input type="text" class="form-control" aria-describedby="emailHelp" name="about_me" id="about_me">
+    <input type="text" class="form-control"  name="about_me" id="about_me">
     <label for="exampleInputEmail1">BIO</label>
-    <input type="text" class="form-control" aria-describedby="emailHelp" name="biography" id="biography">
+    <input type="text" class="form-control"  name="biography" id="biography">
+    <label for="exampleInputEmail1">Ability</label>
+    <input type="text" class="form-control"  name="ability" id="ability">
     <small id="emailHelp" class="form-text text-muted">We'll never share your info with anyone else.</small>
   </div>
-  <button type="submit" class="btn btn-primary ml-3">Enter</button>
+  <button type="submit" class="btn btn-primary ml-3">ADD PROFILE</button>
   <input type="hidden" id="method" value="newHero" name="method">
 </form>
 <?php

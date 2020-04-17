@@ -3,11 +3,12 @@ require "connection.php";
 require "header.php";
 
 $id = $_GET["id"];
-
+// HERO 
 $sql = "SELECT * FROM heroes WHERE id = " . $id;
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
+        $variable = "data.php?method=delete&id=". $id;
         $output .=
             ' <div class="jumbotron">
        <div class="row text-justify-center mt-3">
@@ -21,39 +22,20 @@ if ($result->num_rows > 0) {
       </div>
         <hr class="my-4">
         <p>' . $row["biography"] . '</p>
-        <a class="btn btn-primary btn-lg" href="data.php?method=updateBiography&id=.$id.&biography=My%20Bio&bio" role="button">Edit Bio</a>
+        <a href='.$variable.' class="btn btn-primary ml-3">DELETE PROFILE</a> 
+        // <a class="btn btn-primary btn-lg" href="data.php?method=updateBiography&id=' . $id . '&biography=My%20Bio&bio" role="button">Edit Bio</a>
       </div>';
     }
     echo $output;
 } else {
     echo "0 results";
 }
-
 ?>
 
-<!-- <div class="row">
-    <div class="row m-3 p-3">
-        <div class="card mb-3 border border-dark" style="max-width: 540px;">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    <h5>Friends</h5>
-                </div>
-                <div class="card-body border border-dark">
-
-                    <p class="card-text">
-                        <?php echo $row[name]; ?>
-                    </p>
-                    <img class="card-img-top" style="width:50px;height:50px;" src='.$row["image_url"].' /></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
+<!-- FRIENDS -->
 <div class="row">
 <div class="card p-3" style="width: 300rem;">
 <?php
-
 echo "<h5>Friends</h5>";
 $sql = "SELECT * FROM relationships
 INNER JOIN heroes on relationships.hero2_id=heroes.id
@@ -63,17 +45,17 @@ if ($result->num_rows > 0) {
     $output = "";
     while ($row = $result->fetch_assoc()) {
          $output .=  "<li class='pl-3'>$row[name]</li>";
-         
     }
     echo $output;
 } else {
-    echo "<li class='pl-3'>0 Enemies</li>";
+    echo "<li class='pl-3'>0 Friends</li>";
 }
 
 ?>
-</div>
-</div>
 
+<!-- ENEMIES -->
+</div>
+</div>
 <div class="row">
 <div class="card p-3" style="width: 300rem;">
 <?php
@@ -91,9 +73,9 @@ if ($result->num_rows > 0) {
 } else {
     echo "<li class='pl-3'>0 Enemies</li>";
 }
-echo  '<a href="data.php?method=updatehero&id=4&  " class="btn btn-primary">Delete Enemies</a>';
-?>
 
+?>
+<!-- ABILITIES -->
 <div class="row">
 <div class="card p-3" style="width: 300rem;">
 <?php
@@ -105,27 +87,19 @@ $sql = "SELECT * FROM ability_hero
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $output = "";
+    $edit = "update.php?id=$id";
     while ($row = $result->fetch_assoc()) {
         $output .= "<li class='pl-3'>$row[ability]
         </li>";
     }
     echo $output;
-    echo  '<a href=' . $back . ' class="btn btn-primary">Edit Abilities</a>';
+    echo  '<a href='.$edit.' >Edit Abilities</a>';
 } else {
-    echo "<li class='pl-3'>0 Enemies</li>";
+    echo "<li class='pl-3'>0 Abilities</li>";
+    echo  '<a href='.$edit.' >Edit Abilities</a>';
 }
 ?>
-<!-- <form action="data.php" method="post">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Add Profile</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form> -->
+<!-- BACK BTN -->
 <?php
 $back = "index.php";
 echo '<a href=' . $back . ' class="btn btn-primary">Return to Heroes</a>';
